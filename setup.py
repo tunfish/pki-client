@@ -8,7 +8,7 @@ README = open(os.path.join(here, "README.rst"), encoding="UTF-8").read()
 
 setup(
     name="pki-client",
-    version="0.0.0",
+    version="0.1.0",
     description="PKI client",
     long_description=README,
     license="AGPL 3, EUPL 1.2",
