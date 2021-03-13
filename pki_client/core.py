@@ -27,7 +27,11 @@ class PkiClient:
             f.write(response.content)
 
     def mkcert(
-        self, private_key_path: Path, cert_path: Path, common_name_prefix: str = None
+        self,
+        private_key_path: Path,
+        cert_path: Path,
+        profile: str,
+        common_name_prefix: str = None,
     ):
         """
         Generate X.509 material and autosign it at CA.
@@ -38,7 +42,7 @@ class PkiClient:
         akey.make_csr(common_name_prefix=common_name_prefix)
 
         # Submit CSR to CA for auto-signing.
-        akey.submit_csr(self.autocert_url)
+        akey.submit_csr(url=self.autocert_url, profile=profile)
 
         # Save key material to disk.
         akey.save_key(private_key_path)

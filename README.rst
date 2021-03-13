@@ -18,7 +18,7 @@ Synopsis
 
     pki-client \
         --ca-url=http://127.0.0.1:8000/ --ca-name=RootCA \
-        --cacert=cacert.pem --key=example.key --certificate=example.pem --common-name-prefix=node
+        --cacert=cacert.pem --key=example.key --certificate=example.pem --profile=server --common-name-prefix=node
 
 
 .. _tunfish-ca: https://github.com/tunfish/tunfish-ca

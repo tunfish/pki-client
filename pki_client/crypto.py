@@ -68,23 +68,26 @@ class AsymmetricKey:
         """
         return self.csr.public_bytes(serialization.Encoding.PEM)
 
-    def submit_csr(self, url):
+    def submit_csr(self, url: str, profile: str):
         """
         Submit CSR to CA for autosigning.
         """
         csr_pem = self.get_csr()
         try:
             response = requests.post(
-                url, data=csr_pem, headers={"Content-Type": "application/x-pem-file"}
+                url,
+                data=csr_pem,
+                params={"profile": profile},
+                headers={"Content-Type": "application/x-pem-file"},
             )
+            response.raise_for_status()
         except Exception as ex:
-            raise ValueError(f"Automatically signing certificate failed: {ex}")
+            raise ValueError(
+                f"Automatically signing certificate failed: {ex}. Reason: {response.text}"
+            )
 
-        if response.status_code == 200:
-            self.cert = x509.load_pem_x509_certificate(response.content)
-            return self.cert.public_bytes(encoding=serialization.Encoding.PEM)
-        else:
-            raise ValueError("Automatically signing certificate failed")
+        self.cert = x509.load_pem_x509_certificate(response.content)
+        return self.cert.public_bytes(encoding=serialization.Encoding.PEM)
 
     def save_key(self, filename: Path):
         """

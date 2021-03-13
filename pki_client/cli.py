@@ -45,6 +45,12 @@ from pki_client.core import PkiClient
     help="Prefix for the common name (CN)",
     required=False,
 )
+@click.option(
+    "--profile",
+    type=click.STRING,
+    help="Profile for certificate purpose (server, webserver, client, enduser, ocsp)",
+    required=True,
+)
 def main(
     ca_url: str,
     ca_name: str,
@@ -52,6 +58,7 @@ def main(
     key: Path,
     certificate: Path,
     common_name_prefix: str,
+    profile: str,
 ):
     checked_url = validators.url(ca_url)
     if not checked_url:
@@ -61,5 +68,6 @@ def main(
     client.mkcert(
         private_key_path=key,
         cert_path=certificate,
+        profile=profile,
         common_name_prefix=common_name_prefix,
     )
