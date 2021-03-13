@@ -13,7 +13,11 @@ setup(
     long_description=README,
     license="AGPL 3, EUPL 1.2",
     classifiers=[
-        "Programming Language :: Python 3",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)",
         "Development Status :: 3 - Alpha",
