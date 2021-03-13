@@ -60,9 +60,9 @@ def main(
     common_name_prefix: str,
     profile: str,
 ):
-    checked_url = validators.url(ca_url)
-    if not checked_url:
-        raise ValueError(f"ERROR: Invalid URL '{ca_url}'")
+    #checked_url = validators.url(ca_url)
+    #if not checked_url:
+    #    raise ValueError(f"ERROR: Invalid URL '{ca_url}'")
     client = PkiClient(ca_baseurl=ca_url, ca_name=ca_name)
     client.save_cacert(cacert)
     client.mkcert(
